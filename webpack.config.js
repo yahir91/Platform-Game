@@ -16,11 +16,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
-        },
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
       },
       {
         test: /\.html$/,
@@ -56,9 +59,17 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 9000
+    port: 7090
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+        from: path.resolve(__dirname, 'src/assets', '**', '*'),
+        to: path.resolve(__dirname, 'dist'),
+      },
+    ]
+}),
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true),
       VERSION: JSON.stringify('5fa3b9'),
