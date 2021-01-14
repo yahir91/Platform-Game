@@ -10,7 +10,7 @@ init () {
   }
    
 ready () {
-  this.scene.start('Options');
+  this.scene.start('Title');
     this.readyCount++;
     if (this.readyCount === 5) {
       this.scene.start('Title');
