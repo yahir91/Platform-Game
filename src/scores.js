@@ -1,7 +1,11 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable class-methods-use-this */
 import '@babel/polyfill';
 
 export const submitScore = async (userName, scoreValue) => {
-  const data = { user: userName, score: parseInt(scoreValue) };
+  const data = { user: userName, score: parseInt(scoreValue) }; // eslint-disable-line 
   const parameters = {
     method: 'POST', mode: 'cors', headers: { Accept: 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(data),
   };

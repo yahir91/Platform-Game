@@ -1,3 +1,7 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable class-methods-use-this */
 import 'phaser';
 import config from './modules/Config/config';
 import GameScene from './modules/Scenes/GameScene';
@@ -9,9 +13,9 @@ import CreditsScene from './modules/Scenes/CreditsScene';
 import SubmitScoreScene from './modules/Scenes/SubmitScoreScene';
 import ScoresScene from './modules/Scenes/ScoreScene';
 import Model from './Model';
- 
+
 class Game extends Phaser.Game {
-  constructor () {
+  constructor() {
     super(config);
     const model = new Model();
     this.globals = { model, bgMusic: null };
@@ -26,5 +30,5 @@ class Game extends Phaser.Game {
     this.scene.start('Preloader');
   }
 }
- 
+
 window.game = new Game();

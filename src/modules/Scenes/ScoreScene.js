@@ -1,3 +1,7 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable class-methods-use-this */
 import 'phaser';
 import { getScore } from '../../scores';
 
@@ -32,7 +36,7 @@ export default class ScoreScene extends Phaser.Scene {
         this.menuButton.setTexture('playButton');
       });
       this.add.text(150, 30, 'HighScores', { font: '20px Dragon' });
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 10; i++) { // eslint-disable-line 
         this.add.text(100, ((i + 1) * 20) + 50, `${i + 1}.-  ${this.scoresArray[i][1].user}`, { font: '15px Dragon' });
         this.add.text(500, ((i + 1) * 20) + 50, `Points: ${this.scoresArray[i][1].score}`, { font: '15px Dragon' });
       }
