@@ -54,6 +54,54 @@ export default class GameScene extends Phaser.Scene {
   }
  
   create(){
+
+    this.score = 0;
+
+    // this.scoreText = add.text(16, 16, 'score: 0', {
+    //     fontSize: '32px',
+    //     fill: '#000',
+    //   });
+  
+    //   this.creditText = add.text(480, 570, credString, {
+    //     fontSize: '15px',
+    //     fill: '#000',
+    //   });
+
+    // setting player animation
+    this.anims.create({
+      key: "run",
+      frames: this.anims.generateFrameNumbers("player", {
+          start: 0,
+          end: 10
+      }),
+      frameRate: 10,
+      repeat: 0
+  });
+         // setting coin animation
+
+  this.anims.create({
+      key: "rotate",
+      frames: this.anims.generateFrameNumbers("coin", {
+          start: 0,
+          end: 5
+      }),
+      frameRate: 15,
+      yoyo: true,
+      repeat: -1
+  });
+
+ 
+
+  // setting fire animation
+  this.anims.create({
+      key: "burn",
+      frames: this.anims.generateFrameNumbers("fire", {
+          start: 0,
+          end: 3
+      }),
+      frameRate: 10,
+      repeat: -1
+  });
  
     // group with all active mountains.
     this.mountainGroup = this.add.group();
@@ -291,7 +339,7 @@ update(){
 
     // game over
     if(this.player.y > game.config.height){
-        this.scene.start("PlayGame");
+        this.scene.start("Game");
     }
 
     this.player.x = gameOptions.playerStartPosition;

@@ -4,6 +4,7 @@
   "description": "A platfom game created with phaser",
   "main": "phaser.js",
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "phaser": "^3.51.0"
   },
   "devDependencies": {
