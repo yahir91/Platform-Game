@@ -4,10 +4,6 @@ Platformer Game of a dog chasing for bones. Collect bones to increase your score
 
 ![Gameplay Screenshot](screenshot.png)
 
-# Live version
-
-[Prince Fantasy RPG](https://musing-chandrasekhar-82e3c9.netlify.app/)
-
 # How to run locally
 
 * Clone the project run `npm install` and `npm run build`
