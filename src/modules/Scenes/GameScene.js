@@ -13,7 +13,7 @@ let gameOptions = {
   spawnRange: [80, 300],
 
   // platform width range, in pixels
-  platformSizeRange: [90, 300],
+  platformSizeRange: [200, 300],
 
   // a height range between rightmost platform and next platform to be spawned
   platformHeightRange: [-5, 5],
@@ -37,7 +37,7 @@ let gameOptions = {
   jumps: 2,
 
   // % of probability a coin appears on the platform
-  coinPercent: 25,
+  coinPercent: 100,
 
   // % of probability a fire appears on the platform
   firePercent: 25
@@ -57,38 +57,34 @@ export default class GameScene extends Phaser.Scene {
 
     this.score = 0;
 
+    const style = 'font: 10px Dragon; color: white';
+    this.scoreText = this.add.text(120, 40, 'score: 0', `${style}`)
     // this.scoreText = add.text(16, 16, 'score: 0', {
     //     fontSize: '32px',
     //     fill: '#000',
     //   });
-  
-    //   this.creditText = add.text(480, 570, credString, {
-    //     fontSize: '15px',
-    //     fill: '#000',
-    //   });
-
     // setting player animation
     this.anims.create({
       key: "run",
       frames: this.anims.generateFrameNumbers("player", {
           start: 0,
-          end: 10
+          end: 9
       }),
       frameRate: 10,
       repeat: 0
   });
          // setting coin animation
 
-  this.anims.create({
-      key: "rotate",
-      frames: this.anims.generateFrameNumbers("coin", {
-          start: 0,
-          end: 5
-      }),
-      frameRate: 15,
-      yoyo: true,
-      repeat: -1
-  });
+//   this.anims.create({
+//       key: "rotate",
+//       frames: this.anims.generateFrameNumbers("coin", {
+//           start: 0,
+//           end: 5
+//       }),
+//       frameRate: 15,
+//       yoyo: true,
+//       repeat: -1
+//   });
 
  
 
@@ -202,6 +198,8 @@ export default class GameScene extends Phaser.Scene {
             onComplete: function(){
                 this.coinGroup.killAndHide(coin);
                 this.coinGroup.remove(coin);
+                this.score += 10;
+                this.scoreText.setText(`Score: ${this.score}`);
             }
         });
 
@@ -339,7 +337,7 @@ update(){
 
     // game over
     if(this.player.y > game.config.height){
-        this.scene.start("Game");
+        this.scene.start("Submit", this.score);
     }
 
     this.player.x = gameOptions.playerStartPosition;

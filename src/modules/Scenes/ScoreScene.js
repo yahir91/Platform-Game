@@ -14,7 +14,7 @@ export default class ScoreScene extends Phaser.Scene {
         return 0;
       });
       this.menuButton = this.add.sprite(200, 300, 'playButton').setInteractive();
-      this.menuText = this.add.text(0, 0, 'Title', { font: '10px Dragon', fill: '#fff' });
+      this.menuText = this.add.text(0, 0, 'Title', { font: '25px Dragon', fill: '#fff' });
 
       this.menuButton.setScale(0.4, 0.4);
 
@@ -31,10 +31,10 @@ export default class ScoreScene extends Phaser.Scene {
       this.menuButton.on('pointerout', () => {
         this.menuButton.setTexture('playButton');
       });
-      this.add.text(150, 30, 'HighScores', { font: '16px Dragon' });
+      this.add.text(150, 30, 'HighScores', { font: '20px Dragon' });
       for (let i = 0; i < 10; i++) {
-        this.add.text(100, ((i + 1) * 20) + 50, `${i + 1}.-  ${this.scoresArray[i][1].user}`, { font: '10px Dragon' });
-        this.add.text(225, ((i + 1) * 20) + 50, `Points: ${this.scoresArray[i][1].score}`, { font: '10px Dragon' });
+        this.add.text(100, ((i + 1) * 20) + 50, `${i + 1}.-  ${this.scoresArray[i][1].user}`, { font: '15px Dragon' });
+        this.add.text(500, ((i + 1) * 20) + 50, `Points: ${this.scoresArray[i][1].score}`, { font: '15px Dragon' });
       }
     });
   }

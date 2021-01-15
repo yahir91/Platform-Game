@@ -17,15 +17,13 @@ ready () {
     }
   }
 preload () {
-  
-  // add logo image
-  this.add.image(400, 200, 'logo');
+
  
   // display progress bar
   var progressBar = this.add.graphics();
   var progressBox = this.add.graphics();
-  progressBox.fillStyle(0x222222, 0.8);
-  progressBox.fillRect(240, 270, 320, 50);
+  // progressBox.fillStyle(0x222222, 0.8);
+  // progressBox.fillRect(240, 270, 320, 50);
  
   var width = this.cameras.main.width;
   var height = this.cameras.main.height;
@@ -65,9 +63,9 @@ preload () {
   // update progress bar
   this.load.on('progress', function (value) {
     percentText.setText(parseInt(value * 100) + '%');
-    progressBar.clear();
-    progressBar.fillStyle(0xffffff, 1);
-    progressBar.fillRect(250, 280, 300 * value, 30);
+    // progressBar.clear();
+    // progressBar.fillStyle(0xffffff, 1);
+    // progressBar.fillRect(250, 280, 300 * value, 30);
   });
  
   // update file progress text
@@ -75,18 +73,10 @@ preload () {
     assetText.setText('Loading asset: ' + file.key);
   });
  
-  // remove progress bar when complete
-  this.load.on('complete', function () {
-    progressBar.destroy();
-    progressBox.destroy();
-    loadingText.destroy();
-    percentText.destroy();
-    assetText.destroy();
-  });
  // remove progress bar when complete
   this.load.on('complete', function () {
-  progressBar.destroy();
-  progressBox.destroy();
+  // progressBar.destroy();
+  // progressBox.destroy();
   loadingText.destroy();
   percentText.destroy();
   assetText.destroy();
@@ -95,38 +85,34 @@ preload () {
  
   this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
-  // load assets needed in our game
+  this.load.image('logo', './src/assets/img/logo.png');
   this.load.image('playButton', './src/assets/img/ui/Button.png');
   this.load.image('playButton2', './src/assets/img/ui/ButtonPressed.png');
-  // this.load.image('title', './src/assets/img/title.png');
   this.load.image('blueButton1', './src/assets/img/ui/blue_button02.png');
   this.load.image('blueButton2', './src/assets/img/ui/blue_button03.png');
   this.load.image('phaserLogo', '/src/assets/img/logo.png');
   this.load.image('box', './src/assets/img/ui/grey_box.png');
   this.load.image('checkedBox', './src/assets/img/ui/blue_boxCheckmark.png');
   this.load.audio('bgMusic', ['./src/assets/TownTheme.mp3']);
-
-  this.load.image("platform", "src/assets/img/platform.png");
-
-  // player is a sprite sheet made by 24x48 pixels
+  this.load.image("platform", "./src/assets/img/platform.png");
+  this.load.image('background', './src/assets/img/background.png');
+  this.load.image('character', 'src/assets/img/dog_logo.jpg');
+  this.load.spritesheet('loadIcon', './src/assets/img/load.png', {
+      frameWidth: 100,
+      frameHeight: 110,
+    });
   this.load.spritesheet("player", "./src/assets/img/Pixelart Dog Walk.png", {
       frameWidth: 50,
       frameHeight: 34
   });
-
-  // the coin is a sprite sheet made by 20x20 pixels
   this.load.spritesheet("coin", "./src/assets/img/femur.png", {
       frameWidth: 41,
       frameHeight: 42,
   });
-
-  // the firecamp is a sprite sheet made by 32x58 pixels
   this.load.spritesheet("fire", "./src/assets/img/monster.png", {
       frameWidth: 60,
       frameHeight: 50
   });
-
-  // mountains are a sprite sheet made by 512x512 pixels
   this.load.spritesheet("mountain", "./src/assets/img/mountain.png", {
       frameWidth: 512,
       frameHeight: 512

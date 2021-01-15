@@ -7,7 +7,9 @@ import 'phaser';
     height: 750,
     
     backgroundColor: 0x0c88c7,
-
+    dom: {
+      createContainer: true,
+    },
     // physics settings
     physics: {
         default: "arcade"
