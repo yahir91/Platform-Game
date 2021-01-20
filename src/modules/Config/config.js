@@ -7,8 +7,8 @@ import 'phaser';
 // object containing configuration options
 export default {
   type: Phaser.AUTO,
-  width: 1334,
-  height: 750,
+  width: 960,
+  height: 540,
 
   backgroundColor: 0x0c88c7,
   dom: {

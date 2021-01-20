@@ -98,19 +98,27 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('checkedBox', './src/assets/img/ui/blue_boxCheckmark.png');
     this.load.audio('bgMusic', ['./src/assets/TownTheme.mp3']);
     this.load.image('platform', './src/assets/img/platform.png');
-    this.load.image('background', './src/assets/img/background.png');
+    this.load.image('background', './src/assets/img/rsz_game_background_2.png');
     this.load.image('character', 'src/assets/img/dog_logo.jpg');
     this.load.spritesheet('loadIcon', './src/assets/img/load.png', {
       frameWidth: 100,
       frameHeight: 110,
     });
-    this.load.spritesheet('player', './src/assets/img/Pixelart Dog Walk.png', {
+    this.load.spritesheet('player', './src/assets/mage_walk.png', {
       frameWidth: 50,
-      frameHeight: 34,
+      frameHeight: 60,
     });
-    this.load.spritesheet('coin', './src/assets/img/femur.png', {
-      frameWidth: 41,
-      frameHeight: 42,
+    this.load.spritesheet('player-jump', './src/assets/jump2.png', {
+      frameWidth: 53,
+      frameHeight: 60,
+    });
+    this.load.spritesheet('player-attack', './src/assets/attack.png', {
+      frameWidth: 83,
+      frameHeight: 60,
+    });
+    this.load.spritesheet('coin', './src/assets/assasin_idle.png', {
+      frameWidth: 62,
+      frameHeight: 60,
     });
     this.load.spritesheet('fire', './src/assets/img/monster.png', {
       frameWidth: 60,
