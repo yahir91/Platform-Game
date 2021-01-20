@@ -42,7 +42,7 @@ export default class GameScene extends Phaser.Scene {
     anims.create({
       key: 'attack',
       frames: anims.generateFrameNumbers('player-attack', { start: 0, end: 6 }),
-      frameRate: 8,
+      frameRate: 24,
       // repeat: -1,
     });
 
@@ -189,11 +189,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   attack() {
-    if (this.player.body.touching.down) {
-      this.player.anims.play('attack');
-      // this.player.setVelocityY(gameOptions.jumpForce * -1);
-      // this.playerJumps += 1;
-    }
+    this.player.anims.play('attack');
   }
 
 
