@@ -2,8 +2,8 @@ import Phaser from 'phaser';
 
 const gameOptions = {
   platformStartSpeed: 350,
-  spawnRange: [0, 0],
-  platformSizeRange: [250, 250],
+  spawnRange: [0, 200],
+  platformSizeRange: [300, 400],
   playerGravity: 900,
   jumpForce: 400,
   playerStartPosition: 200,
@@ -105,7 +105,7 @@ export default class GameScene extends Phaser.Scene {
 
 
     // setting collisions between the player and the platform group
-    physics.add.collider(this.player, this.platformGroup, () => {
+    this.platformCollider = this.physics.add.collider(this.player, this.platformGroup, () => {
       if (!this.player.anims.isPlaying) {
         this.player.anims.play('run');
       }
@@ -125,10 +125,19 @@ export default class GameScene extends Phaser.Scene {
   }
 
   collectStar(player, coin) {
-    this.coinGroup.killAndHide(coin);
-    this.coinGroup.remove(coin);
-    this.score += 10;
-    this.scoreText.setText(`Score: ${this.score}`);
+    if (this.player.anims.isPlaying && player.anims.currentAnim.key === 'attack') {
+      console.log('Player is walking')
+      this.coinGroup.killAndHide(coin);
+      this.coinGroup.remove(coin);
+      this.score += 10;
+      this.scoreText.setText(`Score: ${this.score}`);
+    } else {
+    this.dying = true;
+    this.player.anims.stop();
+    this.player.setFrame(2);
+    this.player.body.setVelocityY(-200);
+    this.physics.world.removeCollider(this.platformCollider);
+    }
   }
 
   // the core of the script: platform are added from the pool or created on the fly
@@ -143,9 +152,10 @@ export default class GameScene extends Phaser.Scene {
       coin.visible = true;
       this.coinPool.remove(coin);
     } else {
-      coin = this.physics.add.image(posX, 600 * 0.7, 'coin');
+      coin = this.physics.add.sprite(posX, 600*0.7, "coin")
+      // coin = this.physics.add.image(posX, 600 * 0.7, 'coin');
       coin.setVelocityX(gameOptions.platformStartSpeed * -1);
-      // coin.anims.play("idle");
+      coin.anims.play('idle')
       // coin.setDepth(2);
       this.coinGroup.add(coin);
     }
@@ -174,8 +184,6 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  // the player jumps when on the ground, or once in the air as long as there are jumps
-  // left and the first jump was on the ground
   jump() {
     if (this.player.body.touching.down || (this.playerJumps > 0
        && this.playerJumps < gameOptions.jumps)) {
@@ -194,13 +202,11 @@ export default class GameScene extends Phaser.Scene {
 
 
   update() {
-    // game over
     if (this.player.y > 600) {
       this.scene.start('Submit', this.score);
     }
     this.player.x = gameOptions.playerStartPosition;
 
-    // recycling platforms
     let minDistance = 800;
     this.platformGroup.getChildren().forEach((platform) => {
       const platformDistance = 800 - platform.x - platform.displayWidth / 2;
