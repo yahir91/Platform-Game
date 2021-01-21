@@ -2,7 +2,7 @@
 /* eslint-disable radix */
 import '@babel/polyfill';
 
-const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/Zl4d7IVkemOTTVg2fUdr4/scores/';
+const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/Zl4d7IVkemOTTVg2fUdrad4/scores/';
 
 export const submitScore = async (userName, scoreValue) => {
   const data = { user: userName, score: parseInt(scoreValue) };
