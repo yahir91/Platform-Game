@@ -45,11 +45,12 @@ export default class SubmitScore extends Phaser.Scene {
 
     form.addEventListener('submit', e => {
       e.preventDefault();
-      const test = document.createElement('h4');
       name = document.getElementById('name').value;
-      if (name.length >= 5) {
+      if (name.length >= 1) {
         this.loadIcon.visible = true;
         this.loadIcon.anims.play('loading');
+        form.remove()
+        text.remove()
         const result = submitScore(name, this.score);
         result.then(() => {
           this.scene.start('Score');
@@ -61,8 +62,7 @@ export default class SubmitScore extends Phaser.Scene {
           });
         });
       } else {
-        test.innerText = 'Name is too short';
-        this.add.dom(400, 110, test);
+        alert('name is too short')
       }
     });
   }
