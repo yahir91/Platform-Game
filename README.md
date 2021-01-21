@@ -9,6 +9,8 @@ This is a Platformer Game where you are a mage that has to fight assasins, you m
 * Clone the project run `npm install` and `npm run build`
 * Open the generated index.html on the dist folder. 
 
+# Live Demo [Mage vs Assasins](https://quizzical-bardeen-7ebe1a.netlify.app/)
+
 ## Elements
 
 ### Hero - Mage

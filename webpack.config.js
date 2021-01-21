@@ -81,8 +81,8 @@ module.exports = {
       'typeof WEBGL_RENDERER': JSON.stringify(true),
     }),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: './index.html',
+      template: 'index.html',
+      filename: 'index.html',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
