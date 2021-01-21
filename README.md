@@ -1,6 +1,6 @@
 
-# Dog Chase Platform Game
-Platformer Game of a dog chasing for bones. Collect bones to increase your score. You can submit your score at the end of the game.
+# Mage vs Assasins Platform Game
+This is a Platformer Game where you are a mage that has to fight assasins, you move through a battleground and can attack to defeat the enimies or you can dodge them by jumping.
 
 ![Gameplay Screenshot](screenshot.png)
 
@@ -9,12 +9,32 @@ Platformer Game of a dog chasing for bones. Collect bones to increase your score
 * Clone the project run `npm install` and `npm run build`
 * Open the generated index.html on the dist folder. 
 
+## Elements
+
+### Hero - Mage
+
+![Screenshot](./src/assets/mage_walk.png)
+
+### Mage - Attacking
+
+![Screenshot](./src/assets/attack.png)
+
+### Enemy - Assasins
+
+![Screenshot](./src/assets/assasin_idle.png)
+
+### Battlefield
+
+![Screenshot](./src/assets/img/background.png)
+
 
 # Instructions
-You have to collect as many bones you can and kill the slime without falling or getting caught by the monsters.
+You have to kill as many assasins as you can without touching them or falling from the platforms.
 
-* Press click to jump over platforms.
-* Press double click to make a double jump
+* Press right click to attack the assasins.
+* Press spacebar to jump through platforms or dodge the assasins.
+* Press spacebar a second time to make a double jump.
+* When you die, submit your name and see in which place you are in the leaderboard
 
 # Get Started
 
@@ -43,6 +63,7 @@ You have to collect as many bones you can and kill the slime without falling or 
 * `ES6`
 * `Babel`
 * `npm`
+* `jest`
 
 # Author
 
