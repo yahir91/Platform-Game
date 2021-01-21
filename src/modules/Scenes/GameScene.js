@@ -27,7 +27,7 @@ export default class GameScene extends Phaser.Scene {
 
     anims.create({
       key: 'run',
-      frames: anims.generateFrameNumbers('player', { start: 0, end: 8 }),
+      frames: anims.generateFrameNumbers('player', { start: 0, end: 5 }),
       frameRate: 8,
       repeat: -1,
     });
@@ -40,13 +40,13 @@ export default class GameScene extends Phaser.Scene {
 
     anims.create({
       key: 'attack',
-      frames: anims.generateFrameNumbers('player-attack', { start: 0, end: 6 }),
+      frames: anims.generateFrameNumbers('player-attack', { start: 0, end: 5 }),
       frameRate: 24,
     });
 
     anims.create({
       key: 'idle',
-      frames: anims.generateFrameNumbers('coin', { start: 0, end: 4 }),
+      frames: anims.generateFrameNumbers('coin', { start: 0, end: 3 }),
       frameRate: 8,
       repeat: -1,
     });
