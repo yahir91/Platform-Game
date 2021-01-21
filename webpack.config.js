@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -21,9 +21,9 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+            presets: ['@babel/preset-env'],
+          },
+        },
       },
       {
         test: /\.html$/,
@@ -59,17 +59,17 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 7090
+    port: 7090,
   },
   plugins: [
     new CopyPlugin({
       patterns: [
         {
-        from: path.resolve(__dirname, 'src/assets', '**', '*'),
-        to: path.resolve(__dirname, 'dist'),
-      },
-    ]
-}),
+          from: path.resolve(__dirname, 'src/assets', '**', '*'),
+          to: path.resolve(__dirname, 'dist'),
+        },
+      ],
+    }),
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true),
       VERSION: JSON.stringify('5fa3b9'),
@@ -78,7 +78,7 @@ module.exports = {
       'typeof window': JSON.stringify('object'),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'typeof CANVAS_RENDERER': JSON.stringify(true),
-      'typeof WEBGL_RENDERER': JSON.stringify(true)
+      'typeof WEBGL_RENDERER': JSON.stringify(true),
     }),
     new HtmlWebpackPlugin({
       template: './src/index.html',

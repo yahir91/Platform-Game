@@ -1,13 +1,11 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable class-methods-use-this */
+
+/* eslint-disable radix */
 import '@babel/polyfill';
 
-const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/Zl4d7IVkemOTTVg2fUdzt/scores/'
+const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/Zl4d7IVkemOTTVg2fUdr4/scores/';
 
 export const submitScore = async (userName, scoreValue) => {
-  const data = { user: userName, score: parseInt(scoreValue) }; // eslint-disable-line 
+  const data = { user: userName, score: parseInt(scoreValue) };
   const parameters = {
     method: 'POST', mode: 'cors', headers: { Accept: 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(data),
   };

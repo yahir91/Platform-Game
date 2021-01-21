@@ -1,16 +1,9 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable class-methods-use-this */
-import 'phaser';
+import Phaser from 'phaser';
 import Button from '../Objects/Button';
 
 export default class OptionsScene extends Phaser.Scene {
   constructor() {
     super('Options');
-  }
-
-  preload() {
   }
 
   create() {

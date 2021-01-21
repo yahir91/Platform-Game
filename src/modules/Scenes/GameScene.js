@@ -11,8 +11,6 @@ const gameOptions = {
 };
 
 
-
-
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -25,6 +23,7 @@ export default class GameScene extends Phaser.Scene {
     add.image(480, 270, 'background');
     this.score = 0;
 
+    this.addedPlatforms = 0;
 
     anims.create({
       key: 'run',
@@ -43,7 +42,6 @@ export default class GameScene extends Phaser.Scene {
       key: 'attack',
       frames: anims.generateFrameNumbers('player-attack', { start: 0, end: 6 }),
       frameRate: 24,
-      // repeat: -1,
     });
 
     anims.create({
@@ -53,94 +51,72 @@ export default class GameScene extends Phaser.Scene {
       repeat: -1,
     });
 
-
-
-    // /Platform Group and Pool//
-
     this.platformGroup = add.group({
-
-      // once a platform is removed, it's added to the pool
       removeCallback(platform) {
         platform.scene.platformPool.add(platform);
       },
     });
 
     this.platformPool = add.group({
-
-      // once a platform is removed from the pool, it's added to the active platforms group
       removeCallback(platform) {
         platform.scene.platformGroup.add(platform);
       },
     });
 
-
-    // COIN GROUP AND POOL //
-
     this.coinGroup = add.group({
-
-      // once a coin is removed, it's added to the pool
       removeCallback(coin) {
         coin.scene.coinPool.add(coin);
       },
     });
 
     this.coinPool = add.group({
-
-      // once a coin is removed from the pool, it's added to the active coins group
       removeCallback(coin) {
         coin.scene.coinGroup.add(coin);
       },
     });
 
 
-    // number of consecutive jumps made by the player
     this.playerJumps = 0;
 
-    // adding a platform to the game, the arguments are platform width and x position
+
     this.addPlatform(800, 800 / 2);
 
-    // adding the player;
     this.player = physics.add.sprite(gameOptions.playerStartPosition, 600 / 2, 'player');
     this.player.setGravityY(gameOptions.playerGravity);
 
 
-    // setting collisions between the player and the platform group
     this.platformCollider = this.physics.add.collider(this.player, this.platformGroup, () => {
       if (!this.player.anims.isPlaying) {
         this.player.anims.play('run');
       }
     });
 
-    physics.add.overlap(this.player, this.coinGroup, this.collectStar, null, this);
+    physics.add.overlap(this.player, this.coinGroup, this.killOverlapEnemy, null, this);
 
-    // checking for input
+
     this.input.on('pointerdown', this.attack, this);
     this.input.keyboard.on('keydown-SPACE', this.jump, this);
 
-    // Creating display for Scores
     this.scoreText = add.text(16, 16, 'score: 0', {
       fontSize: '32px',
       fill: '#000',
     });
   }
 
-  collectStar(player, coin) {
+  killOverlapEnemy(player, coin) {
     if (this.player.anims.isPlaying && player.anims.currentAnim.key === 'attack') {
-      console.log('Player is walking')
       this.coinGroup.killAndHide(coin);
       this.coinGroup.remove(coin);
       this.score += 10;
       this.scoreText.setText(`Score: ${this.score}`);
     } else {
-    this.dying = true;
-    this.player.anims.stop();
-    this.player.setFrame(2);
-    this.player.body.setVelocityY(-200);
-    this.physics.world.removeCollider(this.platformCollider);
+      this.dying = true;
+      this.player.anims.stop();
+      this.player.setFrame(2);
+      this.player.body.setVelocityY(-200);
+      this.physics.world.removeCollider(this.platformCollider);
     }
   }
-
-  // the core of the script: platform are added from the pool or created on the fly
 
 
   addCoin(posX) {
@@ -152,17 +128,18 @@ export default class GameScene extends Phaser.Scene {
       coin.visible = true;
       this.coinPool.remove(coin);
     } else {
-      coin = this.physics.add.sprite(posX, 600*0.7, "coin")
-      // coin = this.physics.add.image(posX, 600 * 0.7, 'coin');
+      coin = this.physics.add.sprite(posX, 600 * 0.7, 'coin');
+
       coin.setVelocityX(gameOptions.platformStartSpeed * -1);
-      coin.anims.play('idle')
-      // coin.setDepth(2);
+      coin.anims.play('idle');
+
       this.coinGroup.add(coin);
     }
   }
 
   addPlatform(platformWidth, posX) {
     let platform;
+    this.addedPlatforms += 1;
     if (this.platformPool.getLength()) {
       platform = this.platformPool.getFirst();
       platform.x = posX;
@@ -179,7 +156,7 @@ export default class GameScene extends Phaser.Scene {
     this.nextPlatformDistance = Phaser.Math.Between(gameOptions.spawnRange[0],
       gameOptions.spawnRange[1]);
     const coinAppear = Phaser.Math.Between(0, 10);
-    if (coinAppear > 5) {
+    if (coinAppear > 5 && this.addedPlatforms > 1) {
       this.addCoin(posX);
     }
   }
@@ -217,7 +194,7 @@ export default class GameScene extends Phaser.Scene {
       }
     }, this);
 
-    // recycling coins
+
     this.coinGroup.getChildren().forEach((coin) => {
       if (coin.x < -20) {
         this.coinGroup.killAndHide(coin);
@@ -225,7 +202,6 @@ export default class GameScene extends Phaser.Scene {
       }
     }, this);
 
-    // adding new platforms
     if (minDistance > this.nextPlatformDistance) {
       const nextPlatformWidth = Phaser.Math.Between(gameOptions.platformSizeRange[0],
         gameOptions.platformSizeRange[1]);

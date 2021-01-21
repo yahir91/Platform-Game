@@ -1,36 +1,32 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable class-methods-use-this */
-
+/* eslint-disable no-underscore-dangle */
 export default class Model {
   constructor() {
-    this._soundOn = true;// eslint-disable-line 
-    this._musicOn = true;// eslint-disable-line 
-    this._bgMusicPlaying = false;// eslint-disable-line 
+    this._soundOn = true;
+    this._musicOn = true;
+    this._bgMusicPlaying = false;
   }
 
   set musicOn(value) {
-    this._musicOn = value;// eslint-disable-line 
+    this._musicOn = value;
   }
 
   get musicOn() {
-    return this._musicOn;// eslint-disable-line 
+    return this._musicOn;
   }
 
   set soundOn(value) {
-    this._soundOn = value;// eslint-disable-line 
+    this._soundOn = value;
   }
 
   get soundOn() {
-    return this._soundOn;// eslint-disable-line 
+    return this._soundOn;
   }
 
   set bgMusicPlaying(value) {
-    this._bgMusicPlaying = value;// eslint-disable-line 
+    this._bgMusicPlaying = value;
   }
 
   get bgMusicPlaying() {
-    return this._bgMusicPlaying;// eslint-disable-line 
+    return this._bgMusicPlaying;
   }
 }

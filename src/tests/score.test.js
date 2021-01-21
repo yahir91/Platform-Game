@@ -1,4 +1,4 @@
- import * as scoreAPI from '../scores';
+import * as scoreAPI from '../scores';
 import '@babel/polyfill';
 
 describe('It test the score API.', () => {

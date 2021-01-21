@@ -1,8 +1,5 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable class-methods-use-this */
-import 'phaser';
+/* eslint-disable radix */
+import Phaser from 'phaser';
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
@@ -15,19 +12,13 @@ export default class PreloaderScene extends Phaser.Scene {
 
   ready() {
     this.scene.start('Title');
-    this.readyCount++; // eslint-disable-line 
+    this.readyCount += 1;
     if (this.readyCount === 5) {
       this.scene.start('Title');
     }
   }
 
   preload() {
-  // display progress bar
-    const progressBar = this.add.graphics();
-    const progressBox = this.add.graphics();
-    // progressBox.fillStyle(0x222222, 0.8);
-    // progressBox.fillRect(240, 270, 320, 50);
-
     const { width } = this.cameras.main;
     const { height } = this.cameras.main;
     const loadingText = this.make.text({
@@ -63,23 +54,17 @@ export default class PreloaderScene extends Phaser.Scene {
     });
     assetText.setOrigin(0.5, 0.5);
 
-    // update progress bar
+
     this.load.on('progress', (value) => {
-      percentText.setText(`${parseInt(value * 100)}%`); // eslint-disable-line 
-    // progressBar.clear();
-    // progressBar.fillStyle(0xffffff, 1);
-    // progressBar.fillRect(250, 280, 300 * value, 30);
+      percentText.setText(`${parseInt(value * 100)}%`);
     });
 
-    // update file progress text
     this.load.on('fileprogress', (file) => {
       assetText.setText(`Loading asset: ${file.key}`);
     });
 
-    // remove progress bar when complete
+
     this.load.on('complete', () => {
-      // progressBar.destroy();
-      // progressBox.destroy();
       loadingText.destroy();
       percentText.destroy();
       assetText.destroy();
