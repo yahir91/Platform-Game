@@ -49,8 +49,8 @@ export default class SubmitScore extends Phaser.Scene {
       if (name.length >= 1) {
         this.loadIcon.visible = true;
         this.loadIcon.anims.play('loading');
-        form.remove()
-        text.remove()
+        form.remove();
+        text.remove();
         const result = submitScore(name, this.score);
         result.then(() => {
           this.scene.start('Score');
@@ -61,8 +61,6 @@ export default class SubmitScore extends Phaser.Scene {
             fill: '#000',
           });
         });
-      } else {
-        alert('name is too short')
       }
     });
   }
